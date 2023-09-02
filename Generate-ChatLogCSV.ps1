@@ -1,5 +1,7 @@
 # IMPORTANT: Open and mount the PST in Outlook before running the script
 # Generate a CSV file from a mounted PST file in Outlook containing chat messages
+# Usage: ./Generate-ChatLogCSV.ps1 -PSTPath C:\path\to\target.pst -CSVPath C:\path\to\destination\file.csv
+
 param(
     [Parameter(Mandatory=$true)]
     [string]$PSTPath,
