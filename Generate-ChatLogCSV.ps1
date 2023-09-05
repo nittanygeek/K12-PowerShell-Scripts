@@ -36,7 +36,17 @@ foreach ($ChatMessage in $ChatMessages) {
     # Extract only the message between the body tags
     $HTML = New-Object -Com "HTMLFile"
     [string]$htmlBody = $ChatMessage.HTMLBody
-    $HTML.IHTMLDocument2_write($htmlBody)
+
+    try {
+        # This works in PowerShell with Office installed
+        $html.IHTMLDocument2_write($htmlBody)
+    }
+    catch {
+        # This works when Office is not installed    
+        $src = [System.Text.Encoding]::Unicode.GetBytes($htmlBody)
+        $html.write($src)
+    }
+
     $MessageBody = $HTML.body.innerText
 
     if ($MessageBody -eq $null) {
